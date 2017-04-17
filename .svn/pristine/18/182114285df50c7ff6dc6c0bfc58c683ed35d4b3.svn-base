@@ -1,0 +1,65 @@
+//
+//  MTSingletonManager.m
+//  RJLTestPro
+//
+//  Created by mini on 16/8/24.
+//  Copyright © 2016年 renjialiang. All rights reserved.
+//
+
+#import "MTSingletonManager.h"
+
+@implementation MTSingletonManager
++ (MTSingletonManager *)shareInstance
+{
+	static dispatch_once_t onceToken;
+	static id _sInstance;
+	dispatch_once(&onceToken, ^{
+		_sInstance = [[self alloc] init];
+	});
+	return _sInstance;
+}
+
+- (void)setOtherGridIDArray:(NSMutableArray *)otherGridIDArray
+{
+	_otherGridIDArray = otherGridIDArray;
+	[self saveLocalDataPersistence:otherGridIDArray keyValue:OtherHQTabID];
+}
+
+- (void)setOtherGridImageArray:(NSMutableArray *)otherGridImageArray
+{
+	_otherGridImageArray = otherGridImageArray;
+	[self saveLocalDataPersistence:otherGridImageArray keyValue:OtherHQTabImage];
+}
+
+- (void)setOtherGridTitleArray:(NSMutableArray *)otherGridTitleArray
+{
+	_otherGridTitleArray = otherGridTitleArray;
+	[self saveLocalDataPersistence:otherGridTitleArray keyValue:OtherHQTabTitle];
+}
+
+- (void)setDisplayGridIDArray:(NSMutableArray *)displayGridIDArray
+{
+	_displayGridIDArray = displayGridIDArray;
+	[self saveLocalDataPersistence:displayGridIDArray keyValue:DisplayHQTabID];
+}
+
+- (void)setDisplayGridImageArray:(NSMutableArray *)displayGridImageArray
+{
+	_displayGridImageArray = displayGridImageArray;
+	[self saveLocalDataPersistence:displayGridImageArray keyValue:DisplayHQTabImage];
+}
+
+- (void)setDisplayGridTitleArray:(NSMutableArray *)displayGridTitleArray
+{
+	_displayGridTitleArray = displayGridTitleArray;
+	[self saveLocalDataPersistence:displayGridTitleArray keyValue:DisplayHQTabTitle];
+}
+
+- (void)saveLocalDataPersistence:(NSMutableArray *)object keyValue:(NSString *)key
+{
+	[[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	[[NSUserDefaults standardUserDefaults] setObject:object forKey:key];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+@end

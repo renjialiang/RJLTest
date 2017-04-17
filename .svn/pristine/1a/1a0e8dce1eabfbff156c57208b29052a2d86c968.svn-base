@@ -1,0 +1,224 @@
+////
+////  YBScrollTabHeadView.m
+////  AMHexin
+////
+////  Created by hexin on 1/6/14.
+////
+////
+//
+//#import "YBScrollTabHeadView.h"
+//#import "EQTools.h"
+//
+//#define HEAD_VIEW_PADDING_WIDTH     [EQTools getRealFloat:5]
+//#define HEAD_VIEW_PADDING_TOP       [EQTools getRealFloat:2]
+//#define HEAD_VIEW_PADDING_BOTTOM    [EQTools getRealFloat:1]
+//
+//#define TITLE_BUTTON_SEPERATOR_WIDTH            [EQTools getRealFloat:3.f]
+//#define TITLE_BUTTON_SEPERATOR_PADDING_HEIGHT   5
+//
+//#define BOTTOM_LINE_HEIGHT   2
+//#define YB_TOPTITLE_COUNT	12
+//#define UIColor(r,g,b) [UIColor colorWithRed:(r) / 255.0 green:(g) / 255.0 blue:(b) / 255.0 alpha:1.0]
+//#define Margin 22.5
+//#define defaultFont [UIFont systemFontOfSize:14]
+//@interface YBScrollTabHeadView () {
+//    int _selectedIndex;
+//}
+//
+//@property (nonatomic, retain) NSMutableArray *titleButtons;
+//@property (nonatomic, retain) UIView *highlightBottomView;
+//
+//@end
+//
+//@implementation YBScrollTabHeadView
+//
+//
+//- (id)initWithTitles:(NSArray *)titles
+//{
+//    self = [super initWithFrame:CGRectMake(0, 0, [EQTools getRealFloat:280], 44)];
+//    if (self) {
+//        self.titleButtons = [NSMutableArray array];
+//        _selectedIndex = 0;
+//        
+//        [self prepareViews];
+//        [self setTitles:titles];
+//    }
+//    return self;
+//}
+//- (id)initWithTitles:(NSArray *)titles noOpenAddButton:(BOOL)noOpenAddButton {
+//    _noOpenAddButton = noOpenAddButton;
+//    self = [super initWithFrame:CGRectMake(0, 0, [EQTools getRealFloat:320], 44)];
+//    if (self) {
+//        self.titleButtons = [NSMutableArray array];
+//        _selectedIndex = 0;
+//        
+//        [self prepareViews];
+//        [self setTitles:titles];
+//    }
+//    return self;
+//}
+//- (void)awakeFromNib
+//{
+//    [self prepareViews];
+//}
+//
+//- (void)prepareViews
+//{
+//    self.backgroundColor = [UIColor colorWithRed:238.f/255 green:238.f/255 blue:238.f/255 alpha:1];
+//    
+//    self.highlightBottomView = [[UIView alloc] init];
+//    _highlightBottomView.backgroundColor = [UIColor redColor];
+//    _highlightBottomView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+//    
+//    [self addSubview:_highlightBottomView];
+//}
+//
+//- (void)prepareButtonsWithTitles:(NSArray *)titles
+//{
+//    EQASSERT(titles.count > 0);
+//    if (titles.count == 0) {
+//        return;
+//    }
+//    CGFloat contentSizeX = 0;
+//    CGRect frame = self.frame;
+//    int count = (int)titles.count;
+//    int height = CGRectGetHeight(frame) - HEAD_VIEW_PADDING_TOP - HEAD_VIEW_PADDING_BOTTOM;
+//    for (int i=0; i<titles.count; i++) {
+//        NSString *title = [titles objectAtIndexSafe:i];
+//        CGRect textRect = [title boundingRectWithSize:CGSizeMake(MAXFLOAT, height) options:NSStringDrawingUsesFontLeading | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:defaultFont} context:nil];
+//        NSArray *array = [title componentsSeparatedByString:@"."];
+//        CGFloat width = textRect.size.width + Margin;
+//        UIButton *button = [self titleButtonWithTitle:[array firstObject]];
+//        [button addTarget:self action:@selector(titleButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+//       CGRect btnFrame = CGRectMake(contentSizeX, HEAD_VIEW_PADDING_TOP, width, height);
+//        button.frame = btnFrame;
+//        contentSizeX = contentSizeX + width;
+//        button.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
+//        button.tag = i + 3000;
+//        [self addSubview:button];
+//        [_titleButtons addObject:button];
+//    }
+//    self.scrollEnabled = YES;
+//    self.contentSize = CGSizeMake(contentSizeX, 34);
+//    self.showsHorizontalScrollIndicator = NO;
+//    self.highlightBottomView.frame = CGRectMake(0, CGRectGetHeight(frame) - BOTTOM_LINE_HEIGHT, contentSizeX / count - 1.5 * Margin, BOTTOM_LINE_HEIGHT);
+//    if (_noOpenAddButton) {
+//        NSInteger total = titles.count;
+//        CGFloat width = (Screen_width - (total + 1) * 5 ) / titles.count;
+//        for (UIButton *btn in _titleButtons) {
+//            NSInteger tag = btn.tag - 3000;
+//            btn.frame = CGRectMake((width + 5)* tag + 5, HEAD_VIEW_PADDING_TOP, width, height);
+//        }
+//        self.contentSize = CGSizeMake(Screen_width, 34);
+//        self.highlightBottomView.frame = CGRectMake(width * 0.4 * 0.5, CGRectGetHeight(frame) - BOTTOM_LINE_HEIGHT, width * 0.6, BOTTOM_LINE_HEIGHT);
+//    }
+//    [self setTitleHighlightAtIndex:_selectedIndex animate:NO];
+//}
+//- (UIButton *)titleButtonWithTitle:(NSString *)title
+//{
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    button.backgroundColor = [UIColor clearColor];
+//    [button setTitle:title forState:UIControlStateNormal];
+//    button.titleLabel.font = defaultFont;
+//    [button setTitleColor:UIColor(50, 50, 50) forState:UIControlStateNormal];
+//    [button setTitleColor:UIColor(234, 34, 34) forState:UIControlStateSelected];
+//    
+//    return button;
+//}
+//- (void)gotoTitleWithIndex:(NSInteger)index{
+//    UIButton *button = (UIButton *)_titleButtons[index];
+//    [button sendActionsForControlEvents:UIControlEventTouchUpInside];
+// 
+//}
+//- (void)titleButtonClicked:(UIButton *)sender
+//{
+//    int index = (int)[_titleButtons indexOfObject:sender];
+//    [self gotoSection:index];
+//}
+//
+//-(void)gotoSection:(int)index
+//{
+//    [self setTitleHighlightAtIndex:index animate:YES];
+//    if ([_headViewdelegate respondsToSelector:@selector(scrollTabHeadView:clickedAtIndex:)]) {
+//        [_headViewdelegate scrollTabHeadView:self clickedAtIndex:index];
+//    }
+//}
+//
+//- (int)getSelectdIndex
+//{
+//    return _selectedIndex;
+//}
+//
+//#pragma mark - setter
+//- (void)setTitles:(NSArray *)titles
+//{
+//    if (_titles == titles) {
+//        return;
+//    }
+//    _titles = titles;
+//    
+//    for (UIView *view in _titleButtons) {
+//        [view removeFromSuperview];
+//    }
+//    [_titleButtons removeAllObjects];
+//    
+//    [self prepareButtonsWithTitles:titles];
+//}
+//
+//- (void)setTitleHighlightAtIndex:(int)index animate:(BOOL)isAnim
+//{
+//    if (self.titles.count == 0) {
+//        return;
+//    }
+//    
+//    _selectedIndex = index;
+//    for (UIButton *button in _titleButtons) {
+//        [button setSelected:NO];
+//    }
+//    UIButton *selectedButton = [_titleButtons objectAtIndexSafe:index];
+//    [selectedButton setSelected:YES];
+//    int bottomLineCenterX = selectedButton.center.x;
+//    CGPoint bottomLineCenter = CGPointMake(bottomLineCenterX, _highlightBottomView.center.y);
+//    if (isAnim) {
+//        [UIView animateWithDuration:0.3f animations:^{
+//            _highlightBottomView.center = bottomLineCenter;
+//            [self layoutScrollView:bottomLineCenterX];
+//        }];
+//    }
+//    else {
+//        _highlightBottomView.center = bottomLineCenter;
+//        [self layoutScrollView:bottomLineCenterX];
+//    }
+//}
+//- (void)layoutScrollView:(CGFloat)selectButtonCenterX {
+//    CGFloat newOffsetX = selectButtonCenterX - Screen_width * 0.5;
+//    if (newOffsetX <= 0) {
+//        newOffsetX = 0;
+//    }else if (newOffsetX > self.contentSize.width - self.frame.size.width) {
+//        newOffsetX = self.contentSize.width - self.frame.size.width;
+//    }
+//    self.contentOffset = CGPointMake(newOffsetX, self.contentOffset.y);
+//}
+//
+//#pragma mark -UIScrollView
+//
+//-(void)setHighlightBottomColor:(UIColor *)highlightBottomColor
+//{
+//    _highlightBottomView.backgroundColor = highlightBottomColor;
+//}
+//
+//
+//-(void)setButtonNormalColor:(UIColor *)buttonNormalColor andSelectColor:(UIColor *)buttonSelectedColor
+//{
+//    for (UIButton* button in _titleButtons) {
+//        [button setTitleColor:buttonNormalColor forState:UIControlStateNormal];
+//        [button setTitleColor:buttonSelectedColor forState:UIControlStateSelected];
+//    }
+//}
+//
+//-(void)dealloc
+//{
+//    
+//}
+//
+//@end

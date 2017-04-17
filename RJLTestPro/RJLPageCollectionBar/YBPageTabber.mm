@@ -1,0 +1,473 @@
+////
+////  YBPageTabber.m
+////  AMHexin
+////
+////  Created by hexin on 12/31/13.
+////
+////
+//
+//#import "PageTabberEx.h"
+//#import "AMUIFrameWork.h"
+//#include "EQResourceDef.h"
+//#include "EQResourceHelper.h"
+//#import "PageGrouper.h"
+//#import "PageView.h"
+//#import "UIImagePlus.h"
+//#import "AMPublicVarName.h"
+//#ifdef _COLLECT_USER_BEHAVIOR
+//#include "CollectUserBehavior.h"
+//#endif
+//#import "ThreeInOneSingleUnit.h"
+//#import "ThreeInOne.h"
+//#import "EQTools.h"
+//#import "UIViewExt.h"
+//extern int g_curPageid;
+//extern CEQNodeManager* EQGetNodeManager();
+//extern int g_curCreatingStackId;
+//#define addbuttonWidth 58
+//#import "YBPageTabber.h"
+//
+//@implementation YBPageTabber
+//
+//-(id)initWithFrame:(CGRect)frame andInfo:(NSArray *)ary
+//{
+//    if(self = [super initWithFrame:frame])
+//    {
+//        self.autoresizesSubviews = YES;
+//        _aryPages = [[NSMutableArray alloc] init];
+//        for (NSString* text in ary)
+//        {
+//            CEQNodeManager* pNodeMgr =	EQGetNodeManager();
+//            
+//            //查找标题
+//            NSRange rangFindTitle = [text rangeOfString:@"title="];
+//            if(rangFindTitle.length > 0)
+//            {
+//                NSString* stringValue = [text substringFromIndex:(rangFindTitle.location + rangFindTitle.length)];
+//                self.title = stringValue;
+//                //                    AM_UI_Public_Proxy::SetCurTitle(self.title, @"");
+//                continue;
+//            }
+//            
+//            //查找标题组 可以通过读取标题label来设置相应的标题
+//            NSRange rangFindTitleArray = [text rangeOfString:@"titlesary="];
+//            if(rangFindTitleArray.length > 0)
+//            {
+//                NSString* stringValue = [text substringFromIndex:(rangFindTitleArray.location + rangFindTitleArray.length)];
+//                if(stringValue == nil)
+//                {
+//                    continue;
+//                }
+//                self.titleArray = [[NSArray alloc] initWithArray:[stringValue componentsSeparatedByString:@"|"]];
+//            }
+//            
+//            //查找 pageIds
+//            NSRange rangFind = [text rangeOfString:@"pageIds="];
+//            if(rangFind.length > 0)
+//            {
+//                //查找到 pageIds=
+//                NSString* stringValue = [text substringFromIndex:(rangFind.location + rangFind.length)];
+//                if(stringValue == nil)
+//                {
+//                    continue;
+//                }
+//                
+//                NSArray *pagelistItems = [stringValue componentsSeparatedByString:@"|"];
+//                for(NSString* strPageId in pagelistItems)
+//                {
+//                    int nPageId = [strPageId intValue];
+//                    if(nPageId > 0 && pNodeMgr != NULL)
+//                    {
+//                        UIView* pageView = [[AMUIFrameWork shareingUIFramework] getPageWithId:nPageId groupId:g_curCreatingStackId];
+//                        if(pageView == nil)
+//                        {
+//                            //NSAssert(NO,@"找不到view");
+//                            EQASSERT(0);
+//                        }
+//                        if(![_aryPages containsObject:pageView] && pageView != nil)
+//                        {
+//                            [_aryPages addObject:pageView];
+//                        }
+//                    }
+//                    
+//                }
+//                self.pageViewArray = [self pageViewsWithPageIds:pagelistItems];
+//                [self setFrame:[EQTools getwidthSize:self.frame]];
+//                [self prepareHeadView:NO];
+//                [self preparePageScroller];
+//            }
+//            
+//            NSRange rangFindMulti = [text rangeOfString:@"multipageids="];
+//            if(rangFindMulti.length > 0)
+//            {
+//                //查找到 multipageids= 该模式创建独立的页面
+//                NSString* stringValue = [text substringFromIndex:(rangFindMulti.location + rangFindMulti.length)];
+//                if(stringValue == nil)
+//                {
+//                    continue;
+//                }
+//                
+//                NSArray *pagelistItems = [stringValue componentsSeparatedByString:@"|"];
+//                self.pageViewArray = [self pageViewsWithMultiPageIds:pagelistItems];
+//                [self setFrame:[EQTools getwidthSize:self.frame]];
+//                [self prepareHeadView:NO];
+//                [self preparePageScroller];
+//            }
+//        }
+//
+//    }
+//    return self;
+//}
+//- (id)initWithCoder:(NSCoder *)aDecoder
+//{
+//	if(self = [super initWithCoder:aDecoder])
+//    {
+//        _aryPages = [[NSMutableArray alloc] init];
+//        self.autoresizingMask = UIViewAutoresizingFlexibleWidth |UIViewAutoresizingFlexibleHeight;
+//		//初始化各个 tab 项，得到资源 id
+//		NSArray* ary = self.subviews;
+//		for (UIView* v in ary)
+//		{
+//			if([v isKindOfClass:[UILabel class]])
+//			{
+//                CEQNodeManager* pNodeMgr =	EQGetNodeManager();
+//				NSString* text = ((UILabel*)v).text;
+//				
+//                //查找标题
+//				NSRange rangFindTitle = [text rangeOfString:@"title="];
+//				if(rangFindTitle.length > 0)
+//				{
+//					NSString* stringValue = [text substringFromIndex:(rangFindTitle.location + rangFindTitle.length)];
+//					self.title = stringValue;
+////                    AM_UI_Public_Proxy::SetCurTitle(self.title, @"");
+//					continue;
+//				}
+//                
+//                //查找标题组 可以通过读取标题label来设置相应的标题
+//                NSRange rangFindTitleArray = [text rangeOfString:@"titlesary="];
+//                if(rangFindTitleArray.length > 0)
+//                {
+//                    NSString* stringValue = [text substringFromIndex:(rangFindTitleArray.location + rangFindTitleArray.length)];
+//                    if(stringValue == nil)
+//                    {
+//                        continue;
+//                    }
+//                    self.titleArray = [[NSArray alloc] initWithArray:[stringValue componentsSeparatedByString:@"|"]];
+//                }
+//                
+//				//查找 pageIds
+//				NSRange rangFind = [text rangeOfString:@"pageIds="];
+//				if(rangFind.length > 0)
+//				{
+//					//查找到 pageIds=
+//					NSString* stringValue = [text substringFromIndex:(rangFind.location + rangFind.length)];
+//					if(stringValue == nil)
+//					{
+//						continue;
+//					}
+//					
+//					NSArray *pagelistItems = [stringValue componentsSeparatedByString:@"|"];
+//                    for(NSString* strPageId in pagelistItems)
+//					{
+//						int nPageId = [strPageId intValue];
+//						if(nPageId > 0 && pNodeMgr != NULL)
+//						{
+//							UIView* pageView = [[AMUIFrameWork shareingUIFramework] getPageWithId:nPageId groupId:g_curCreatingStackId];
+//							if(pageView == nil)
+//							{
+//								//NSAssert(NO,@"找不到view");
+//                                EQASSERT(0);
+//							}
+//							if(![_aryPages containsObject:pageView] && pageView != nil)
+//							{
+//								[_aryPages addObject:pageView];
+//							}
+//						}
+//						
+//					}
+//					self.pageViewArray = [self pageViewsWithPageIds:pagelistItems];
+//                    [self setFrame:[EQTools getwidthSize:self.frame]];
+////                    [self prepareHeadView];
+//                    [self preparePageScroller];
+//				}
+//                
+//				NSRange rangFindMulti = [text rangeOfString:@"multipageids="];
+//				if(rangFindMulti.length > 0)
+//				{
+//					//查找到 multipageids= 该模式创建独立的页面
+//					NSString* stringValue = [text substringFromIndex:(rangFindMulti.location + rangFindMulti.length)];
+//					if(stringValue == nil)
+//					{
+//						continue;
+//					}
+//					
+//					NSArray *pagelistItems = [stringValue componentsSeparatedByString:@"|"];
+//					self.pageViewArray = [self pageViewsWithMultiPageIds:pagelistItems];
+//                    [self setFrame:[EQTools getwidthSize:self.frame]];
+////                    [self prepareHeadView];
+//                    [self preparePageScroller];
+//                }
+//			}
+//		}
+//    }
+//    return  self;
+//}
+//
+///**
+// *  获取行情PageTabber
+// *
+// *  @param view PageTabber的子视图
+// *
+// *  @return PageTabber
+// */
+//+ (YBPageTabber *)getYBPageTabber:(UIView *)view
+//{
+//	if (!view) {
+//		return nil;
+//	}
+//	UIView *supView = view.superview;
+//	if ([supView isKindOfClass:[YBPageTabber class]]) {
+//		return (YBPageTabber *)supView;
+//	}
+//	else {
+//		return [self getYBPageTabber:supView];
+//	}
+//}
+//
+//- (NSArray *)pageViewsWithMultiPageIds:(NSArray *)pagelistItems
+//{
+//    CEQNodeManager* pNodeMgr =	EQGetNodeManager();
+//    if (pNodeMgr == NULL) {
+//        return nil;
+//    }
+//    NSMutableArray *pageViews = [NSMutableArray arrayWithCapacity:pagelistItems.count];
+//    for(NSString* strPageId in pagelistItems)
+//    {
+//        int nPageId = [strPageId intValue];
+//        if(nPageId > 0)
+//        {
+//            UIView* pageView = nil;
+//            pageView = [[AMUIFrameWork shareingUIFramework] getPageWithIdEx:nPageId groupId:g_curCreatingStackId];
+////            if(pageView == nil)
+////            {
+////                EQASSERT(0);
+////                continue;
+////            }
+//            [pageViews addObject:pageView];
+//        }
+//    }
+//    return pageViews;
+//}
+//
+//- (NSArray *)pageViewsWithPageIds:(NSArray *)pagelistItems
+//{
+//    CEQNodeManager* pNodeMgr =	EQGetNodeManager();
+//    if (pNodeMgr == NULL) {
+//        return nil;
+//    }
+//    NSMutableArray *pageViews = [NSMutableArray arrayWithCapacity:pagelistItems.count];
+//    for(NSString* strPageId in pagelistItems)
+//    {
+//        int nPageId = [strPageId intValue];
+//        if(nPageId > 0)
+//        {
+//            UIView* pageView = nil;
+//            pageView = [[AMUIFrameWork shareingUIFramework] getPageWithId:nPageId groupId:g_curCreatingStackId];
+//            if(pageView == nil)
+//            {
+//                EQASSERT(0);
+//                continue;
+//            }
+//            [pageViews addObject:pageView];
+//        }
+//    }
+//    return pageViews;
+//}
+//
+//- (NSArray *)pageViewTitles
+//{
+//    if (_titleArray && _titleArray.count > 0)
+//    {
+//        return _titleArray;
+//    }
+//    else
+//    {
+//        NSMutableArray *titles = [NSMutableArray arrayWithCapacity:self.pageViewArray.count];
+//        for (PageView *pageView in _pageViewArray) {
+//            [titles addObject:(pageView._titleItem.title==nil ? @"" : pageView._titleItem.title)];
+//        }
+//        return titles;
+//    }
+//}
+//- (void)setNoOpenAddButton:(BOOL)noOpenAddButton {
+//    _noOpenAddButton = noOpenAddButton;
+//    [self prepareHeadView:noOpenAddButton];
+//}
+//- (void)prepareHeadView:(BOOL)noOpenAddButton
+//{
+//    if (noOpenAddButton) {
+//        self.headView = [[YBScrollTabHeadView alloc] initWithTitles:[self pageViewTitles] noOpenAddButton:noOpenAddButton];
+//    }else {
+//        self.headView = [[YBScrollTabHeadView alloc] initWithTitles:[self pageViewTitles]];
+//    }
+//    self.headView.frame =  CGRectMake(0, 0,CGRectGetWidth(self.headView.frame) , TAB_HEAD_VIEW_HEIGHT);
+//    self.headView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+//    self.headView.headViewdelegate = self;
+//    self.headView.tag = 1;
+//    [self addSubview:self.headView];
+//    if (!noOpenAddButton) {
+//        self.addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        self.addButton.frame = CGRectMake(CGRectGetMaxX(self.headView.frame), 0, addbuttonWidth, TAB_HEAD_VIEW_HEIGHT);
+//        self.addButton.backgroundColor = [UIColor colorWithRed:242.f/255 green:242.f/255 blue:242.f/255 alpha:1];
+//        [self.addButton addTarget:self action:@selector(addButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ybadd.png"]];
+//        imageView.frame = CGRectMake(self.addButton.x + 14, 13, 15, 15);
+//        [self addSubview:self.addButton];
+//        [self addSubview:imageView];
+//    }
+//}
+//- (void)addButtonClick:(UIButton *)btn {
+//    if ([self.delegate respondsToSelector:@selector(pageTabber:addButtonClick:)]) {
+//        [self.delegate pageTabber:self addButtonClick:btn];
+//    }
+//}
+//- (void)preparePageScroller
+//{
+//    EQASSERT(self.pageViewArray.count > 0);
+//    if (self.pageViewArray.count > 0) {
+//        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+//        layout.itemSize = CGSizeMake(Screen_width,[EQTools getRealFloat:self.frame.size.height- TAB_HEAD_VIEW_HEIGHT] );
+//        layout.minimumLineSpacing = 0;
+//        layout.minimumInteritemSpacing = 0;
+//        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//        self.pageScroller = [[YBPageRoundScroller alloc] initWithViews:_pageViewArray andLayout:layout];
+//        self.pageScroller.roundDelegate = self;
+//        self.pageScroller.scrollEnabled = YES;
+//        [self addSubview:_pageScroller];
+//    }
+//}
+//- (void)layoutSubviews {
+//    [super layoutSubviews];
+//    _pageScroller.frame = CGRectMake(0, TAB_HEAD_VIEW_HEIGHT, Screen_width,self.frame.size.height - TAB_HEAD_VIEW_HEIGHT);
+//}
+//#pragma mark - head view delegate
+//- (void)scrollTabHeadView:(YBScrollTabHeadView *)headView clickedAtIndex:(int)index
+//{
+//    [self enforceScroll:index];
+//}
+//- (void)enforceScroll:(int)index {
+//    [self didScroll:self.pageScroller fromIndex:self.pageScroller.focusIndex toIndex:index];
+//    [self.pageScroller scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+//    self.pageScroller.focusIndex = index;
+//}
+//#pragma mark - page scroll delegate
+//- (void)didScroll:(YBPageRoundScroller *)scroller fromIndex:(int)from toIndex:(int)to
+//{
+//    self.toString = [_titleArray objectAtIndexSafe:to];
+//    [self.headView setTitleHighlightAtIndex:to animate:YES];
+//    
+//    PageView *fromView = [scroller.viewArray objectAtIndexSafe:from];
+//    PageView *toView = [scroller.viewArray objectAtIndexSafe:to];
+//	self.selectIndex = to;
+//    [self dealSavePoint];  
+//    NSMutableDictionary* pageData = [NSMutableDictionary dictionaryWithDictionary:[fromView getPageData]];
+//    [pageData setObjectSafe:self.toString forKey:@"selectedTitle"];
+//    [pageData removeObjectForKey:key_no_pushIn];
+//    [toView setPageData:pageData];
+//    
+//    [fromView willDisappear];
+//    [toView willAppear];
+//    
+//    [fromView didDisappear];
+//    [toView didAppear];
+//}
+//
+//#pragma mark - page grouper protocal
+//- (PageView*)getCurFocusPage
+//{
+//    PageView *view = [self.pageScroller.viewArray objectAtIndexSafe:self.pageScroller.focusIndex];
+//    return view;
+//}
+//
+//- (NSString *)titleString
+//{
+//    return [(PageView *)[self getCurFocusPage] _titleItem].title;
+//}
+//
+//- (BOOL)setFocusPageWithId:(int)nPageId
+//{
+//    NSInteger index = [self.pageScroller.viewArray indexOfObjectPassingTest:^BOOL(PageView *obj, NSUInteger idx, BOOL *stop) {
+//        if ([obj getPageId] == nPageId) {
+//            *stop = YES;
+//            return YES;
+//        }
+//        return NO;
+//    }];
+//    if (index == NSNotFound) {
+//        return NO;
+//    }
+//    [self enforceScroll:(int)index];
+//    return YES;
+//}
+//
+//-(BOOL)setFocusPageWithIndex:(int)index
+//{
+//    if (index >= 0 && index < [self.pageViewArray count])
+//    {
+//        [self enforceScroll:index];
+//        return YES;
+//    }
+//    return NO;
+//}
+//
+//- (void)setPageGroupToPageView:(PageGrouper*)pageGroup
+//{
+//    self.pageGrouper = pageGroup;
+//    if([_aryPages count] > 0)
+//    {
+//        for(PageView *v in _aryPages)
+//        {
+//            if([v isKindOfClass:[PageView class]])
+//            {
+//                v.pageGroup = pageGroup;
+//            }
+//        }
+//    }
+//}
+//
+//-(void)dealloc
+//{
+//    
+//}
+//- (void)dealSavePoint {
+//
+//    NSString *str = nil;
+//    NSString *title = self.headView.titles[_selectIndex];
+//    if ([title isEqualToString:@"晨会纪要"]) {
+//        str = @"chjy";
+//    }else if ([title isEqualToString:@"宏观研究"]) {
+//        str = @"hgyj";
+//    }else if ([title isEqualToString:@"策略研究"]) {
+//        str = @"clyj";
+//    }else if ([title isEqualToString:@"行业研究"]) {
+//        str = @"hyyj";
+//    }else if ([title isEqualToString:@"个股研究"]) {
+//        str = @"gegyj";
+//    }else if ([title isEqualToString:@"港股研究"]) {
+//        str = @"gagyj";
+//    }else if ([title isEqualToString:@"金融工程"]) {
+//        str = @"jrgc";
+//    }else if ([title isEqualToString:@"基金研究"]) {
+//        str = @"jjyj";
+//    }else if([title isEqualToString:@"债券研究"]) {
+//        str = @"zqyj";
+//    }else if([title isEqualToString:@"新三板研究"]) {
+//        str = @"xsbyj";
+//    }else if([title isEqualToString:@"最新报告"]) {
+//        str = @"zxbg";
+//    }else if([title isEqualToString:@"我的订阅"]) {
+//        str = @"wddy";
+//    }
+//    [MMTestTool addTestWithString:[NSString stringWithFormat:@"if_%@_ybzx",str]];
+//}
+//@end

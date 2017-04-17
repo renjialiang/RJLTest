@@ -1,0 +1,13 @@
+//
+//  RJLTableView.h
+//  RJLTestPro
+//
+//  Created by mini on 16/9/20.
+//  Copyright © 2016年 renjialiang. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface RJLTableView : UITableView
+
+@end

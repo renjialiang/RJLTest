@@ -1,0 +1,56 @@
+//
+//  CustomGridButton.h
+//  RJLTestPro
+//
+//  Created by mini on 16/8/24.
+//  Copyright © 2016年 renjialiang. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#define ScreenWidth  [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+
+#define CustomGridHeight 50
+#define PerRowCustomGridCount 5
+#define CustomGridWidth (ScreenWidth / PerRowCustomGridCount)
+#define PaddingX 10
+#define PaddingY 10
+
+@protocol CustomGridDelegate;
+
+@interface CustomGridButton : UIButton
+@property(nonatomic, strong) NSString *gridTitle;
+@property(nonatomic, strong) NSString *gridImageString;
+@property(nonatomic) NSInteger gridId;
+@property(nonatomic) BOOL      isChecked;
+@property(nonatomic) BOOL      isMove;
+@property(nonatomic) NSInteger gridIndex;
+@property(nonatomic) CGPoint   gridCenterPoint;
+@property(nonatomic, weak) id <CustomGridDelegate> delegate;
+
+- (instancetype)initWithFrame:(CGRect)frame
+						title:(NSString *)title
+				  normalImage:(UIImage *)normalImage
+			 highlightedImage:(UIImage *)highlightedImage
+					   gridId:(NSInteger)gridId
+					  atIndex:(NSInteger)index
+				  isAddDelete:(BOOL)isAddDelete
+				   deleteIcon:(UIImage *)deleteIcon
+				withIconImage:(NSString *)imageString;
+@end
+@protocol CustomGridDelegate <NSObject>
+
+//响应格子的点击事件
+- (void)gridItemDidClicked:(CustomGridButton *)clickItem;
+
+//响应格子删除事件
+- (void)gridItemDidDeleteClicked:(UIButton *)deleteButton;
+
+//响应格子的长安手势事件
+- (void)pressGestureStateBegan:(UIPanGestureRecognizer *)longPressGesture withGridItem:(CustomGridButton *) grid;
+
+- (void)pressGestureStateChangedWithPoint:(CGPoint) gridPoint gridItem:(CustomGridButton *) gridItem;
+
+- (void)pressGestureStateEnded:(CustomGridButton *) gridItem;
+
+@end

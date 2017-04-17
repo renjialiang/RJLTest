@@ -1,0 +1,55 @@
+//
+//  RJLTestViewController.m
+//  RJLTestPro
+//
+//  Created by mini on 16/9/21.
+//  Copyright © 2016年 renjialiang. All rights reserved.
+//
+
+#import "RJLPageCollectionBar/NewPageTabber.h"
+#import "RJLPageCollectionBar/RJLWheelPageView.h"
+#import "RJLTestViewController.h"
+
+@interface RJLTestViewController ()
+@property (nonatomic, strong) RJLWheelPageView *wheelPageView;
+@property (nonatomic, strong) NewPageTabber *pageTab;
+
+@end
+
+@implementation RJLTestViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+//    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+//    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//    layout.itemSize = self.view.bounds.size;
+//    layout.minimumLineSpacing = 0;
+//    layout.minimumInteritemSpacing = 0;
+//    layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//    self.wheelPageView = [[RJLWheelPageView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+//    NSArray *pageView = @[ @"http://www.51ifind.com/index.php?c=index&a=download", @"http://www.51ifind.com/index.php?c=index&a=index" ];
+//    [self.wheelPageView setPageViewArray:pageView];
+	
+	_pageTab = [[NewPageTabber alloc]initWithFrame:self.view.bounds infoArray:nil];
+    [self.view addSubview:_pageTab];
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

@@ -1,0 +1,303 @@
+//
+//  MoveTabView.m
+//  RJLTestPro
+//
+//  Created by mini on 16/8/24.
+//  Copyright © 2016年 renjialiang. All rights reserved.
+//
+
+#import "MoveTabView.h"
+#import "MTSingletonManager.h"
+@interface MoveTabView () <CustomGridDelegate, UIGestureRecognizerDelegate>
+@property (nonatomic, weak) CustomGridButton *currentMoveCustom;
+@property (nonatomic) CGPoint startPoint;
+@property (nonatomic) CGPoint originPoint;
+@property (nonatomic, strong) UIView *coverView;
+@end
+
+@implementation MoveTabView
+- (void)dealloc
+{
+	NSLog(@"dealloc");
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+	self = [super initWithFrame:frame];
+	if (self) {
+		[self initMySelf];
+		self.backgroundColor = [UIColor blueColor];
+	}
+	return self;
+}
+
+- (void)refreshPageToEdit
+{
+	[self openEditState:nil];
+}
+
+- (void)closeEditState
+{
+	[self createViewToCover]; 
+}
+
+- (void)initMySelf
+{
+	self.gridListArray = [[NSMutableArray alloc] initWithCapacity:10];
+	self.displayGridTitleArray = [MTSingletonManager shareInstance].displayGridTitleArray;
+	self.displayGridImageArray = [MTSingletonManager shareInstance].displayGridImageArray;
+	self.displayGridIDArray = [MTSingletonManager shareInstance].displayGridIDArray;
+	[self.gridListArray removeAllObjects];
+	for (NSInteger index = 0; index < [_displayGridTitleArray count]; index++)
+	{
+		NSString *gridTitle = _displayGridTitleArray[index];
+		NSString *gridImage = _displayGridImageArray[index];
+		NSInteger gridID = [self.displayGridIDArray[index] integerValue];
+		CustomGridButton *gridItem = [[CustomGridButton alloc] initWithFrame:CGRectZero title:gridTitle normalImage:[UIImage imageNamed:@"app_item_bg"] highlightedImage:[UIImage imageNamed:@"app_item_bg"] gridId:gridID atIndex:index isAddDelete:NO deleteIcon:[UIImage imageNamed:@"app_item_plus"]  withIconImage:gridImage];
+		gridItem.delegate = self;
+		gridItem.gridTitle = gridTitle;
+		gridItem.gridImageString = gridImage;
+		gridItem.gridId = gridID;
+		[self addSubview:gridItem];
+		[self.gridListArray addObject:gridItem];
+	}
+	//for test print out
+	for (NSInteger i = 0; i < _gridListArray.count; i++) {
+		CustomGridButton *gridItem = _gridListArray[i];
+		gridItem.gridCenterPoint = gridItem.center;
+	}
+	//更新页面
+	[self getNewData];
+	[self createViewToCover];
+}
+
+- (void)createViewToCover
+{
+	if (!self.coverView) {
+		self.coverView = [[UIView alloc]initWithFrame:self.bounds];
+	}
+	else {
+		self.coverView.frame = self.bounds;
+	}
+	UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(openEditState:)];
+	[_coverView addGestureRecognizer:longGesture];
+	longGesture = nil;
+	[self addSubview:_coverView];
+}
+
+- (void)openEditState:(UILongPressGestureRecognizer*)longGesture
+{
+	[_coverView removeFromSuperview];
+	_coverView = nil;
+}
+
+- (void)addGridItem:(CustomGridButton *)customItem
+{
+	[customItem changeAddCustomFrame:[_gridListArray count]];
+	customItem.gridIndex = [_gridListArray count];
+	customItem.delegate = self;
+	BOOL flag = NO;
+	if (_coverView) {
+		flag = YES;
+		[self openEditState:nil];
+	}
+	[_gridListArray addObject:customItem];
+	[_displayGridTitleArray addObject:customItem.gridTitle];
+	[_displayGridImageArray addObject:customItem.gridImageString];
+	[_displayGridIDArray addObject:[NSNumber numberWithInteger:customItem.gridId]];
+	[self addSubview:customItem];
+	customItem.delegate = self;
+	//更新页面
+	[self getNewData];
+	[self saveArray];
+	if (flag) {
+		[self createViewToCover];
+	}
+}
+
+#pragma mark --- 更新页面
+-(void)getNewData
+{
+	NSInteger gridHeight;
+	if (self.gridListArray.count % PerRowCustomGridCount == 0) {
+		NSUInteger row = self.gridListArray.count / PerRowCustomGridCount;
+		gridHeight = CustomGridHeight * row + PaddingY * (row + 1);
+	}
+	else{
+		NSUInteger row = self.gridListArray.count / PerRowCustomGridCount;
+		gridHeight = CustomGridHeight * (row + 1) + PaddingY * (row + 2);
+	}
+	CGRect frameRect = self.frame;
+	frameRect.size.height = gridHeight;
+	self.frame = frameRect;
+}
+
+- (void)sortGridList
+{
+	[_gridListArray sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+		CustomGridButton *tempGrid1 = (CustomGridButton *)obj1;
+		CustomGridButton *tempGrid2 = (CustomGridButton *)obj2;
+		return tempGrid1.gridIndex > tempGrid2.gridIndex;
+	}];
+
+	//更新所有格子的中心点坐标信息
+	for (NSInteger i = 0; i < _gridListArray.count; i++)
+	{
+		CustomGridButton *gridItem = _gridListArray[i];
+		if ([gridItem isEqual:_currentMoveCustom]) {
+			gridItem.gridCenterPoint = self.originPoint;
+		}
+		else {
+			gridItem.gridCenterPoint = gridItem.center;
+		}
+	}
+	[self saveArray];
+}
+
+#pragma mark - 保存更新后数组
+-(void)saveArray
+{
+	NSMutableArray * array1 = [[NSMutableArray alloc]init];
+	NSMutableArray * array2 = [[NSMutableArray alloc]init];
+	NSMutableArray * array3 = [[NSMutableArray alloc]init];
+	for (int i = 0; i < _gridListArray.count; i++) {
+		CustomGridButton * grid = _gridListArray[i];
+		[array1 addObject:grid.gridTitle];
+		[array2 addObject:grid.gridImageString];
+		[array3 addObject:[NSString stringWithFormat:@"%ld",(long)grid.gridId]];
+	}
+	[MTSingletonManager shareInstance].displayGridIDArray = [[NSMutableArray alloc]initWithArray:array3];
+	[MTSingletonManager shareInstance].displayGridImageArray = [[NSMutableArray alloc]initWithArray:array2];
+	[MTSingletonManager shareInstance].displayGridTitleArray = [[NSMutableArray alloc]initWithArray:array1];
+}
+
+- (void)removeOutOfRangeCustomButton:(CustomGridButton *)item
+{
+	NSInteger index = [self.gridListArray indexOfObject:item];
+	for (NSInteger j = [self.gridListArray count] - 1; j > index; j--) {
+		CustomGridButton *customButton = [_gridListArray objectAtIndex:j];
+		CustomGridButton *customPlusButton = [_gridListArray objectAtIndex:j - 1];
+		customButton.gridIndex = customPlusButton.gridIndex;
+		customButton.center = customPlusButton.gridCenterPoint;
+	}
+	[item removeFromSuperview];
+	[self.gridListArray removeObject:item];
+	for (NSInteger i = 0; i < _gridListArray.count; i++)
+	{
+		CustomGridButton *gridItem = _gridListArray[i];
+		gridItem.gridCenterPoint = gridItem.center;
+	}
+	for (NSInteger i = 0; i < _gridListArray.count; i++)
+	{
+		CustomGridButton *customButton = [_gridListArray objectAtIndex:i];
+		[UIView animateWithDuration:0.5 animations:^{
+			customButton.center = customButton.gridCenterPoint;
+		}];
+	}
+	[self saveArray];
+	[self getNewData];
+	if (self.addBlock) {
+		self.addBlock(item);
+	}
+}
+
+#pragma mark CustomGridDelegate
+- (void)gridItemDidClicked:(CustomGridButton *)clickItem
+{
+	if ([_gridListArray count] > RetainBaseItemCount) {
+		if (self.currentMoveCustom && [self.currentMoveCustom isEqual:clickItem]) {
+			return;
+		}
+		[self removeOutOfRangeCustomButton:clickItem];
+	}
+}
+
+//响应格子的长安手势事件
+- (void)pressGestureStateBegan:(UIPanGestureRecognizer *)longPressGesture withGridItem:(CustomGridButton *) grid
+{
+	if (!self.currentMoveCustom) {
+		self.currentMoveCustom = grid;
+		self.currentMoveCustom.isMove = YES;
+	}
+	else {
+		if (![self.currentMoveCustom isEqual:grid]) {
+			return;
+		}
+	}
+	grid.transform = CGAffineTransformMakeScale(1.1, 1.1);
+	self.startPoint = [longPressGesture locationInView:longPressGesture.view];
+	self.originPoint = grid.center;
+}
+
+- (void)pressGestureStateChangedWithPoint:(CGPoint)gridPoint gridItem:(CustomGridButton *)gridItem
+{
+	if (![self.currentMoveCustom isEqual:gridItem]) {
+		return;
+	}
+	if (!gridItem.isMove) {
+		return;
+	}
+	[self bringSubviewToFront:gridItem];
+	CGFloat deltaX = gridPoint.x - _startPoint.x;
+	CGFloat deltaY = gridPoint.y - _startPoint.y;
+	gridItem.center = CGPointMake(gridItem.center.x + deltaX, gridItem.center.y + deltaY);
+	NSInteger fromIndex = gridItem.gridIndex;
+	NSInteger toIndex = [CustomGridButton indexOfPoint:gridItem.center withButton:gridItem gridArray:_gridListArray];
+	if (toIndex == -1) {
+		return;
+	}
+	CustomGridButton *targetGrid = _gridListArray[toIndex];
+	self.originPoint = targetGrid.gridCenterPoint;
+	gridItem.gridIndex = toIndex;
+	
+	if ((fromIndex - toIndex) > 0) {
+		NSInteger lastGridIndex = fromIndex;
+		for (NSInteger i = toIndex; i < fromIndex; i++)
+		{
+			CustomGridButton *lastGrid = _gridListArray[lastGridIndex];
+			CustomGridButton *preGrid = _gridListArray[lastGridIndex-1];
+			[UIView animateWithDuration:0.5 animations:^{
+				preGrid.center = lastGrid.gridCenterPoint;
+			}];
+			preGrid.gridIndex = lastGridIndex;
+			lastGridIndex--;
+		}
+	}
+	else if((fromIndex - toIndex) < 0) {
+		for (NSInteger i = fromIndex; i < toIndex; i++)
+		{
+			CustomGridButton *topOneGrid = _gridListArray[i];
+			CustomGridButton *nextGrid = _gridListArray[i+1];
+			nextGrid.gridIndex = i;
+			[UIView animateWithDuration:0.5 animations:^{
+				nextGrid.center = topOneGrid.gridCenterPoint;
+			}];
+		}
+	}
+	[self sortGridList];
+}
+
+- (void)pressGestureStateEnded:(CustomGridButton *)gridItem
+{
+	if (![self.currentMoveCustom isEqual:gridItem]) {
+		return;
+	}
+	if (gridItem.isMove) {
+		gridItem.isMove = NO;
+		self.currentMoveCustom = nil;
+	}
+	if (!CGRectContainsPoint(self.bounds, gridItem.center)) {
+		if ([_gridListArray count] > RetainBaseItemCount) {
+			[self removeOutOfRangeCustomButton:gridItem];
+			return;
+		}
+	}
+	[UIView animateWithDuration:0.5 animations:^{
+		gridItem.transform = CGAffineTransformIdentity;
+		gridItem.alpha = 1.0;
+		gridItem.center = _originPoint;
+	}];
+	[self sortGridList];
+}
+
+@end

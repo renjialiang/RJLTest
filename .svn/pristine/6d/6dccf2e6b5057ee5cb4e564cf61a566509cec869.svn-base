@@ -1,0 +1,71 @@
+//
+//  MoveTabView.m
+//  RJLTestPro
+//
+//  Created by mini on 16/8/24.
+//  Copyright © 2016年 renjialiang. All rights reserved.
+//
+
+#import "MoveTabView.h"
+#import "CustomGridButton.h"
+#import "MTSingletonManager.h"
+@interface MoveTabView () <CustomGridDelegate>
+
+@end
+
+@implementation MoveTabView
+- (instancetype)initWithFrame:(CGRect)frame
+{
+	self = [super initWithFrame:frame];
+	if (self) {
+		[self initMySelf];
+	}
+	return self;
+}
+
+- (void)initMySelf
+{
+	self.gridListArray = [[NSMutableArray alloc] initWithCapacity:10];
+	self.displayGridTitleArray = [MTSingletonManager shareInstance].displayGridTitleArray;
+	self.displayGridImageArray = [MTSingletonManager shareInstance].displayGridImageArray;
+	self.displayGridIDArray = [MTSingletonManager shareInstance].displayGridIDArray;
+	[self.gridListArray removeAllObjects];
+	for (NSInteger index = 0; index < [_displayGridTitleArray count]; index++)
+	{
+		NSString *gridTitle = _displayGridTitleArray[index];
+		NSString *gridImage = _displayGridImageArray[index];
+		NSInteger gridID = [self.displayGridIDArray[index] integerValue];
+		CustomGridButton *gridItem = [[CustomGridButton alloc] initWithFrame:CGRectZero title:gridTitle normalImage:[UIImage imageNamed:@"app_item_bg"] highlightedImage:[UIImage imageNamed:@"app_item_bg"] gridId:gridID atIndex:index isAddDelete:NO deleteIcon:[UIImage imageNamed:@"app_item_plus"]  withIconImage:gridImage];
+		gridItem.delegate = self;
+		gridItem.gridTitle = gridTitle;
+		gridItem.gridImageString = gridImage;
+		gridItem.gridId = gridID;
+		
+		[self addSubview:gridItem];
+		[self.gridListArray addObject:gridItem];
+		
+	}
+	
+	//for test print out
+	for (NSInteger i = 0; i < _gridListArray.count; i++) {
+		CustomGridButton *gridItem = _gridListArray[i];
+		gridItem.gridCenterPoint = gridItem.center;
+	}
+	
+	//更新页面
+	[self getNewData];
+}
+
+#pragma mark --- 更新页面
+-(void)getNewData
+{
+	NSInteger gridHeight;
+	if (self.displayGridTitleArray.count % 3 == 0) {
+		gridHeight = 123 * self.displayGridTitleArray.count/3;
+	}
+	else{
+		gridHeight = 123 * (self.displayGridTitleArray.count/3+1);
+	}
+//	myScrollView.contentInset = UIEdgeInsetsMake(0, 0, gridHeight, 0);
+}
+@end

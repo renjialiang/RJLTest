@@ -1,0 +1,116 @@
+//
+//  RJLTableControlView.m
+//  RJLTestPro
+//
+//  Created by mini on 16/9/20.
+//  Copyright © 2016年 renjialiang. All rights reserved.
+//
+
+#import "RJLFPSLabel.h"
+#import "RJLTableControlView.h"
+#import "RJLTableView.h"
+#import "UIView+RJLAdd.h"
+@interface RJLTableControlView () < UITableViewDataSource, UITableViewDelegate >
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) RJLFPSLabel *fpsLabel;
+@end
+
+@implementation RJLTableControlView
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	_tableView = [RJLTableView new];
+	_tableView.delegate = self;
+	_tableView.dataSource = self;
+    _tableView.frame = self.view.bounds;
+    _tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0);
+    _tableView.scrollIndicatorInsets = _tableView.contentInset;
+    _tableView.backgroundColor = [UIColor clearColor];
+    _tableView.backgroundView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_tableView];
+
+    _fpsLabel = [RJLFPSLabel new];
+    [_fpsLabel sizeToFit];
+	[_fpsLabel setBackgroundColor:[UIColor redColor]];
+    _fpsLabel.top = 0;
+    _fpsLabel.left = 10;
+    _fpsLabel.alpha = 0;
+    [self.view addSubview:_fpsLabel];
+
+    if ([UIDevice currentDevice].systemVersion.doubleValue < 7)
+    {
+        _fpsLabel.top -= 44;
+        _tableView.top -= 64;
+        _tableView.height += 20;
+    }
+
+    // Do any additional setup after loading the view.
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+	if (_fpsLabel.alpha == 0) {
+		[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+			_fpsLabel.alpha = 1;
+		} completion:NULL];
+	}
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+	if (!decelerate) {
+		if (_fpsLabel.alpha != 0) {
+			[UIView animateWithDuration:1 delay:2 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+				_fpsLabel.alpha = 0;
+			} completion:NULL];
+		}
+	}
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+	if (_fpsLabel.alpha != 0) {
+		[UIView animateWithDuration:1 delay:2 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+			_fpsLabel.alpha = 0;
+		} completion:NULL];
+	}
+}
+
+- (void)scrollViewDidScrollToTop:(UIScrollView *)scrollView {
+	if (_fpsLabel.alpha == 0) {
+		[UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+			_fpsLabel.alpha = 1;
+		} completion:^(BOOL finished) {
+		}];
+	}
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return 60;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	NSString *cellID = @"cell";
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+	if (!cell) {
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+//		cell.delegate = self;
+	}
+	[cell.textLabel setText:[NSString stringWithFormat:@"sdfa%ld",indexPath.row]];
+	return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 44;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+	return NO;
+}
+
+@end

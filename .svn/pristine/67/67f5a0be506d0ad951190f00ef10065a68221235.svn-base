@@ -1,0 +1,20 @@
+//
+//  MoveTabView.h
+//  RJLTestPro
+//
+//  Created by mini on 16/8/24.
+//  Copyright © 2016年 renjialiang. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface MoveTabView : UIView
+@property(nonatomic, strong)NSMutableArray *gridListArray;
+@property(nonatomic, strong)NSMutableArray *displayGridTitleArray; //title
+@property(nonatomic, strong)NSMutableArray *displayGridImageArray;//image
+@property(nonatomic, strong)NSMutableArray *displayGridIDArray;//gridId
+
+//@property(nonatomic, strong)NSMutableArray *otherGridTitleArray;
+//@property(nonatomic, strong)NSMutableArray *otherGridIdArray;
+//@property(nonatomic, strong)NSMutableArray *otherGridImageArray;//image
+@end

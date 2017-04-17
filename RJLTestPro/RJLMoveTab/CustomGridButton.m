@@ -1,0 +1,159 @@
+//
+//  CustomGridButton.m
+//  RJLTestPro
+//
+//  Created by mini on 16/8/24.
+//  Copyright © 2016年 renjialiang. All rights reserved.
+//
+
+#import "CustomGridButton.h"
+
+@implementation CustomGridButton
+- (instancetype)initWithFrame:(CGRect)frame
+{
+	self = [super initWithFrame:frame];
+	if (self) {
+	}
+	return self;
+}
+
+
+- (instancetype)initWithFrame:(CGRect)frame
+						title:(NSString *)title
+				  normalImage:(UIImage *)normalImage
+			 highlightedImage:(UIImage *)highlightedImage
+					   gridId:(NSInteger)gridId
+					  atIndex:(NSInteger)index
+				  isAddDelete:(BOOL)isAddDelete
+				   deleteIcon:(UIImage *)deleteIcon
+				withIconImage:(NSString *)imageString
+{
+	self = [super initWithFrame:frame];
+	if (self) {
+		//计算每个格子的X坐标
+		CGFloat pointX = (index % PerRowCustomGridCount) * (CustomGridWidth + PaddingX) + PaddingX;
+		//计算每个格子的Y坐标
+		CGFloat pointY = (index / PerRowCustomGridCount) * (CustomGridHeight + PaddingY) + PaddingY;
+		
+		[self setFrame:CGRectMake(pointX, pointY, CustomGridWidth+1, CustomGridHeight+1)];
+		[self setBackgroundImage:normalImage forState:UIControlStateNormal];
+		[self setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
+		[self setTitle:title forState:UIControlStateNormal];
+		[self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		self.titleLabel.font = [UIFont boldSystemFontOfSize:14];
+		[self addTarget:self action:@selector(gridClick:) forControlEvents:UIControlEventTouchUpInside];
+		
+//		// 图片icon
+//		UIImageView * imageIcon = [[UIImageView alloc]initWithFrame:CGRectMake(self.frame.size.width/2-18, 34, 36, 36)];
+//		imageIcon.image = [UIImage imageNamed:imageString];
+//		imageIcon.tag = self.gridId;
+//		[self addSubview:imageIcon];
+//		
+//		// 标题
+//		UILabel * title_label = [[UILabel alloc]initWithFrame:CGRectMake(self.frame.size.width/2-42, 75, 84, 20)];
+//		title_label.text = title;
+//		title_label.textAlignment = NSTextAlignmentCenter;
+//		title_label.font = [UIFont systemFontOfSize:14];
+//		title_label.backgroundColor = [UIColor clearColor];
+//		title_label.textColor = [UIColor blackColor];
+//		[self addSubview:title_label];
+		
+		//////////
+		[self setGridId:gridId];
+		[self setGridIndex:index];
+		[self setGridCenterPoint:self.center];
+		
+		
+		
+		UIPanGestureRecognizer *tapPressGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gridItemPress:)];
+		[self addGestureRecognizer:tapPressGesture];
+		tapPressGesture = nil;
+		//判断是否要添加删除图标
+		if (isAddDelete) {
+			//当长按时添加删除按钮图标
+			UIButton *deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+			[deleteBtn setFrame:CGRectMake(self.frame.size.width-30, 10, 20, 20)];
+			[deleteBtn setBackgroundColor:[UIColor clearColor]];
+			[deleteBtn setBackgroundImage:deleteIcon forState:UIControlStateNormal];
+//			[deleteBtn addTarget:self action:@selector(deleteGrid:) forControlEvents:UIControlEventTouchUpInside];
+			[deleteBtn setHidden:YES];
+			
+			/////////////
+			[deleteBtn setTag:gridId];
+			[self addSubview:deleteBtn];
+		}
+	}
+	return self;
+}
+
+- (void)changeAddCustomFrame:(NSInteger)index
+{
+	CGFloat pointX = (index % PerRowCustomGridCount) * (CustomGridWidth + PaddingX) + PaddingX;
+	CGFloat pointY = (index / PerRowCustomGridCount) * (CustomGridHeight + PaddingY) + PaddingY;
+	[self setFrame:CGRectMake(pointX, pointY, CustomGridWidth+1, CustomGridHeight+1)];
+	[self setGridCenterPoint:self.center];
+}
+
+- (void)gridClick:(CustomGridButton *)clickItem
+{
+	if (self.delegate && [self.delegate respondsToSelector:@selector(gridItemDidClicked:)]) {
+		[self.delegate gridItemDidClicked:clickItem];
+	}
+}
+
+- (void)deleteGrid:(UIButton *)deleteItem
+{
+	if (self.delegate && [self.delegate respondsToSelector:@selector(gridItemDidDeleteClicked:)]) {
+		[self.delegate gridItemDidDeleteClicked:deleteItem];
+	}
+}
+
+- (void)gridItemPress:(UIPanGestureRecognizer *)tapPressGesture
+{
+	switch (tapPressGesture.state) {
+		case UIGestureRecognizerStateBegan:
+		{
+			if (self.delegate && [self.delegate respondsToSelector:@selector(pressGestureStateBegan:withGridItem:)]) {
+				[self.delegate pressGestureStateBegan:tapPressGesture withGridItem:self];
+			}
+			break;
+		}
+		case UIGestureRecognizerStateChanged:
+		{
+			CGPoint newPoint = [tapPressGesture locationInView:tapPressGesture.view];
+			if (self.delegate && [self.delegate respondsToSelector:@selector(pressGestureStateChangedWithPoint:gridItem:)]) {
+				[self.delegate pressGestureStateChangedWithPoint:newPoint gridItem:self];
+			}
+			break;
+		}
+		case UIGestureRecognizerStateEnded:
+		{
+			if (self.delegate && [self.delegate respondsToSelector:@selector(pressGestureStateEnded:)]) {
+				[self.delegate pressGestureStateEnded:self];
+			}
+			break;
+		}
+		default:
+			break;
+	}
+}
+
+//根据格子的坐标计算格子的索引位置
++ (NSInteger)indexOfPoint:(CGPoint)point
+			   withButton:(UIButton *)btn
+				gridArray:(NSMutableArray *)gridListArray
+{
+	for (NSInteger i = 0; i < gridListArray.count; i++)
+	{
+		UIButton *appButton = gridListArray[i];
+		if (appButton != btn)
+		{
+			if (CGRectContainsPoint(appButton.frame, point))
+			{
+				return i;
+			}
+		}
+	}
+	return -1;
+}
+@end

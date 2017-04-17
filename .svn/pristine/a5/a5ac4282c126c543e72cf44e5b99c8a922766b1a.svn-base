@@ -1,0 +1,17 @@
+//
+//  RJLCollectionViewCell.m
+//  RJLTestPro
+//
+//  Created by mini on 16/9/21.
+//  Copyright © 2016年 renjialiang. All rights reserved.
+//
+
+#import "RJLCollectionViewCell.h"
+
+@implementation RJLCollectionViewCell
+
+- (void)awakeFromNib {
+    // Initialization code
+}
+
+@end
