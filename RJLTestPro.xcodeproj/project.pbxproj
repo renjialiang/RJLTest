@@ -32,7 +32,7 @@
 		3D3FFBD81D13578A00F77DDC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3FFBD71D13578A00F77DDC /* Foundation.framework */; };
 		3D42B8BB1DBA7FE700B64817 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D42B8BA1DBA7FE700B64817 /* AddressBook.framework */; };
 		3D42B8BD1DBA7FFE00B64817 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D42B8BC1DBA7FFE00B64817 /* AddressBookUI.framework */; };
-		3D42B8C41DBAD0C200B64817 /* iFMAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D42B8C31DBAD0C200B64817 /* iFMAddressBook.m */; settings = {ASSET_TAGS = (); }; };
+		3D42B8C41DBAD0C200B64817 /* iFMAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D42B8C31DBAD0C200B64817 /* iFMAddressBook.m */; };
 		3D4933D41DAAB5C700CAF855 /* RJLWheelTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4933D31DAAB5C700CAF855 /* RJLWheelTitleView.m */; };
 		3D4933E01DAB1ACF00CAF855 /* ifmChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4933DF1DAB1ACF00CAF855 /* ifmChart.m */; };
 		3D4933E31DAB1AFC00CAF855 /* ifmChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4933E21DAB1AFC00CAF855 /* ifmChartData.m */; };
@@ -54,11 +54,11 @@
 		3D77D76C1D70AD3A002F865B /* FixTabView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D77D76B1D70AD3A002F865B /* FixTabView.m */; };
 		3D8736771CADEC6100850891 /* RJLCFNetWorkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8736761CADEC6100850891 /* RJLCFNetWorkController.m */; };
 		3D9366901D99C34400B14B3D /* RCLearnAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D93668F1D99C34400B14B3D /* RCLearnAnimation.m */; };
-		3DAC372E1DB0540500273BED /* ifmChartBottomTimeComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC372D1DB0540500273BED /* ifmChartBottomTimeComponent.m */; settings = {ASSET_TAGS = (); }; };
-		3DAC37311DB05F3900273BED /* ifmChartTopLegendComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC37301DB05F3900273BED /* ifmChartTopLegendComponent.m */; settings = {ASSET_TAGS = (); }; };
-		3DAC37341DB0634200273BED /* ifmChartSuspensionComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC37331DB0634200273BED /* ifmChartSuspensionComponent.m */; settings = {ASSET_TAGS = (); }; };
-		3DAC37371DB0662400273BED /* CurveSuspensionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC37361DB0662400273BED /* CurveSuspensionView.m */; settings = {ASSET_TAGS = (); }; };
-		3DAC373A1DB0719100273BED /* ShuPingSuspensionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC37391DB0719100273BED /* ShuPingSuspensionView.m */; settings = {ASSET_TAGS = (); }; };
+		3DAC372E1DB0540500273BED /* ifmChartBottomTimeComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC372D1DB0540500273BED /* ifmChartBottomTimeComponent.m */; };
+		3DAC37311DB05F3900273BED /* ifmChartTopLegendComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC37301DB05F3900273BED /* ifmChartTopLegendComponent.m */; };
+		3DAC37341DB0634200273BED /* ifmChartSuspensionComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC37331DB0634200273BED /* ifmChartSuspensionComponent.m */; };
+		3DAC37371DB0662400273BED /* CurveSuspensionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC37361DB0662400273BED /* CurveSuspensionView.m */; };
+		3DAC373A1DB0719100273BED /* ShuPingSuspensionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAC37391DB0719100273BED /* ShuPingSuspensionView.m */; };
 		3DAFEF401CF4C20D00D219A3 /* RJLIndicatorLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAFEF3F1CF4C20D00D219A3 /* RJLIndicatorLabel.m */; };
 		3DAFEF431CF4C22800D219A3 /* RJLIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAFEF421CF4C22800D219A3 /* RJLIndicatorView.m */; };
 		3DAFEF461CF4ECD000D219A3 /* RJLIndicatorStretchLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DAFEF451CF4ECD000D219A3 /* RJLIndicatorStretchLabel.m */; };
@@ -78,10 +78,10 @@
 		3DB3BE471D91B31F00F77E11 /* RJLWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3BE461D91B31F00F77E11 /* RJLWeakProxy.m */; };
 		3DB3BE4A1D91B60600F77E11 /* RJLTableControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3BE491D91B60600F77E11 /* RJLTableControlView.m */; };
 		3DB3BE511D91B89200F77E11 /* UIView+RJLAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB3BE501D91B89200F77E11 /* UIView+RJLAdd.m */; };
-		3DBBE5941E5E5D32006EA44F /* spaceship.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3DBBE5931E5E5D32006EA44F /* spaceship.jpg */; settings = {ASSET_TAGS = (); }; };
-		3DBBE5971E5E68A1006EA44F /* RJLRunLoopWork.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBE5961E5E68A1006EA44F /* RJLRunLoopWork.m */; settings = {ASSET_TAGS = (); }; };
-		3DBDD6B21E01B16A0068DA18 /* RCCollectionViewControler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBDD6B11E01B16A0068DA18 /* RCCollectionViewControler.m */; settings = {ASSET_TAGS = (); }; };
-		3DBDD6B51E01B3BF0068DA18 /* RCCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBDD6B41E01B3BF0068DA18 /* RCCollectionViewFlowLayout.m */; settings = {ASSET_TAGS = (); }; };
+		3DBBE5941E5E5D32006EA44F /* spaceship.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3DBBE5931E5E5D32006EA44F /* spaceship.jpg */; };
+		3DBBE5971E5E68A1006EA44F /* RJLRunLoopWork.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBBE5961E5E68A1006EA44F /* RJLRunLoopWork.m */; };
+		3DBDD6B21E01B16A0068DA18 /* RCCollectionViewControler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBDD6B11E01B16A0068DA18 /* RCCollectionViewControler.m */; };
+		3DBDD6B51E01B3BF0068DA18 /* RCCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBDD6B41E01B3BF0068DA18 /* RCCollectionViewFlowLayout.m */; };
 		3DBF68A21D920F6200CB4163 /* RJLReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBF68A11D920F6200CB4163 /* RJLReachability.m */; };
 		3DBF68AA1D92F23D00CB4163 /* YBPageRoundScroller.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3DBF68A51D92F23D00CB4163 /* YBPageRoundScroller.mm */; };
 		3DBF68AB1D92F23D00CB4163 /* YBPageTabber.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3DBF68A71D92F23D00CB4163 /* YBPageTabber.mm */; };
@@ -90,9 +90,9 @@
 		3DBF68B11D933F9300CB4163 /* RJLCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DBF68B01D933F9300CB4163 /* RJLCollectionViewCell.xib */; };
 		3DBF68B41D93426200CB4163 /* RJLCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBF68B31D93426200CB4163 /* RJLCollectionViewCell.m */; };
 		3DBF68B71D93526400CB4163 /* RJLTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBF68B61D93526400CB4163 /* RJLTestViewController.m */; };
-		3DBFA55A1E663D9E00E8BDBD /* RJLFluencyMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFA5591E663D9E00E8BDBD /* RJLFluencyMonitor.m */; settings = {ASSET_TAGS = (); }; };
-		3DBFA55C1E663E3F00E8BDBD /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBFA55B1E663E3F00E8BDBD /* CrashReporter.framework */; settings = {ASSET_TAGS = (); }; };
-		3DBFA55F1E66511F00E8BDBD /* RJLCrashHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFA55E1E66511F00E8BDBD /* RJLCrashHandler.m */; settings = {ASSET_TAGS = (); }; };
+		3DBFA55A1E663D9E00E8BDBD /* RJLFluencyMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFA5591E663D9E00E8BDBD /* RJLFluencyMonitor.m */; };
+		3DBFA55C1E663E3F00E8BDBD /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBFA55B1E663E3F00E8BDBD /* CrashReporter.framework */; };
+		3DBFA55F1E66511F00E8BDBD /* RJLCrashHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFA55E1E66511F00E8BDBD /* RJLCrashHandler.m */; };
 		3DBFD6641CEB8ECB0042D3C4 /* RJLAdvertisementSrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFD6631CEB8ECB0042D3C4 /* RJLAdvertisementSrollView.m */; };
 		3DBFD6671CEBAB9D0042D3C4 /* RJLProjectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DBFD6661CEBAB9D0042D3C4 /* RJLProjectVC.m */; };
 		3DBFD66B1CEBC3130042D3C4 /* appIntroduction_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3DBFD6681CEBC3130042D3C4 /* appIntroduction_1.jpg */; };
@@ -129,6 +129,12 @@
 		3DDAE7951D77A53B001E986F /* 363598977.acc in Resources */ = {isa = PBXBuildFile; fileRef = 3DDAE7941D77A53B001E986F /* 363598977.acc */; };
 		3DDAE79E1D77B7EF001E986F /* RJLAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDAE79D1D77B7EF001E986F /* RJLAudioPlayer.m */; };
 		3DE2C1C71D6CB565007B92FF /* RJLNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DE2C1C61D6CB565007B92FF /* RJLNotificationCenter.m */; };
+		9A8CFAF81EBC566B009862ED /* RJLRunTimeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CFAED1EBC566B009862ED /* RJLRunTimeController.m */; };
+		9A8CFAF91EBC566B009862ED /* RJLRuntimeTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CFAEF1EBC566B009862ED /* RJLRuntimeTools.m */; };
+		9A8CFAFA1EBC566B009862ED /* RuntimeObjcTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CFAF11EBC566B009862ED /* RuntimeObjcTest.m */; };
+		9A8CFAFB1EBC566B009862ED /* RunTimeObjectOne+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CFAF31EBC566B009862ED /* RunTimeObjectOne+Category.m */; };
+		9A8CFAFC1EBC566B009862ED /* RunTimeObjectOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CFAF51EBC566B009862ED /* RunTimeObjectOne.m */; };
+		9A8CFAFD1EBC566B009862ED /* UIViewController+Tracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CFAF71EBC566B009862ED /* UIViewController+Tracking.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -383,6 +389,18 @@
 		3DDAE79D1D77B7EF001E986F /* RJLAudioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJLAudioPlayer.m; sourceTree = "<group>"; };
 		3DE2C1C51D6CB565007B92FF /* RJLNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJLNotificationCenter.h; sourceTree = "<group>"; };
 		3DE2C1C61D6CB565007B92FF /* RJLNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJLNotificationCenter.m; sourceTree = "<group>"; };
+		9A8CFAEC1EBC566B009862ED /* RJLRunTimeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJLRunTimeController.h; sourceTree = "<group>"; };
+		9A8CFAED1EBC566B009862ED /* RJLRunTimeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJLRunTimeController.m; sourceTree = "<group>"; };
+		9A8CFAEE1EBC566B009862ED /* RJLRuntimeTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJLRuntimeTools.h; sourceTree = "<group>"; };
+		9A8CFAEF1EBC566B009862ED /* RJLRuntimeTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJLRuntimeTools.m; sourceTree = "<group>"; };
+		9A8CFAF01EBC566B009862ED /* RuntimeObjcTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuntimeObjcTest.h; sourceTree = "<group>"; };
+		9A8CFAF11EBC566B009862ED /* RuntimeObjcTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuntimeObjcTest.m; sourceTree = "<group>"; };
+		9A8CFAF21EBC566B009862ED /* RunTimeObjectOne+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RunTimeObjectOne+Category.h"; sourceTree = "<group>"; };
+		9A8CFAF31EBC566B009862ED /* RunTimeObjectOne+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RunTimeObjectOne+Category.m"; sourceTree = "<group>"; };
+		9A8CFAF41EBC566B009862ED /* RunTimeObjectOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunTimeObjectOne.h; sourceTree = "<group>"; };
+		9A8CFAF51EBC566B009862ED /* RunTimeObjectOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunTimeObjectOne.m; sourceTree = "<group>"; };
+		9A8CFAF61EBC566B009862ED /* UIViewController+Tracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Tracking.h"; sourceTree = "<group>"; };
+		9A8CFAF71EBC566B009862ED /* UIViewController+Tracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Tracking.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -812,6 +830,7 @@
 		3DD617721CADE7CC00C03555 /* RJLTestPro */ = {
 			isa = PBXGroup;
 			children = (
+				9A8CFAEB1EBC566B009862ED /* RJLRuntime */,
 				3DBDD6AF1E01B1120068DA18 /* RCCollectionView */,
 				3D42B8C11DBACF5D00B64817 /* Function */,
 				3D254A8A1DB005D700A37886 /* AFNetworking */,
@@ -887,6 +906,25 @@
 				3DD6B5721D503D9F0007AF5E /* RJLThemeController.m */,
 			);
 			path = RJLThemeController;
+			sourceTree = "<group>";
+		};
+		9A8CFAEB1EBC566B009862ED /* RJLRuntime */ = {
+			isa = PBXGroup;
+			children = (
+				9A8CFAEC1EBC566B009862ED /* RJLRunTimeController.h */,
+				9A8CFAED1EBC566B009862ED /* RJLRunTimeController.m */,
+				9A8CFAEE1EBC566B009862ED /* RJLRuntimeTools.h */,
+				9A8CFAEF1EBC566B009862ED /* RJLRuntimeTools.m */,
+				9A8CFAF01EBC566B009862ED /* RuntimeObjcTest.h */,
+				9A8CFAF11EBC566B009862ED /* RuntimeObjcTest.m */,
+				9A8CFAF21EBC566B009862ED /* RunTimeObjectOne+Category.h */,
+				9A8CFAF31EBC566B009862ED /* RunTimeObjectOne+Category.m */,
+				9A8CFAF41EBC566B009862ED /* RunTimeObjectOne.h */,
+				9A8CFAF51EBC566B009862ED /* RunTimeObjectOne.m */,
+				9A8CFAF61EBC566B009862ED /* UIViewController+Tracking.h */,
+				9A8CFAF71EBC566B009862ED /* UIViewController+Tracking.m */,
+			);
+			path = RJLRuntime;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1037,6 +1075,7 @@
 				3D3FFBC61D133C6600F77DDC /* CoreImageData.m in Sources */,
 				3D4933E91DAB2B4200CAF855 /* ifmChartLeftScaleComponent.m in Sources */,
 				3D39FF871CF02D3200175004 /* NSArray+PreventSpill.m in Sources */,
+				9A8CFAF91EBC566B009862ED /* RJLRuntimeTools.m in Sources */,
 				3DD6177B1CADE7CC00C03555 /* ViewController.m in Sources */,
 				3DC4F9BF1CF0E76600C4E90F /* UILabel+Test.m in Sources */,
 				3D4933F51DAB52C300CAF855 /* ifmChartLineComponent.m in Sources */,
@@ -1077,12 +1116,14 @@
 				3DB3BE471D91B31F00F77E11 /* RJLWeakProxy.m in Sources */,
 				3DD6B56F1D50325F0007AF5E /* RJLThemeView.m in Sources */,
 				3DBF68B71D93526400CB4163 /* RJLTestViewController.m in Sources */,
+				9A8CFAFC1EBC566B009862ED /* RunTimeObjectOne.m in Sources */,
 				3D8736771CADEC6100850891 /* RJLCFNetWorkController.m in Sources */,
 				3D4D21341D41661D00FD00B1 /* TTViewController.m in Sources */,
 				3DD617751CADE7CC00C03555 /* main.m in Sources */,
 				3DB3BE3F1D91A93300F77E11 /* RJLTableView.m in Sources */,
 				3DAC37371DB0662400273BED /* CurveSuspensionView.m in Sources */,
 				3D77D7631D6E4F79002F865B /* MoveTabView.m in Sources */,
+				9A8CFAFA1EBC566B009862ED /* RuntimeObjcTest.m in Sources */,
 				3DB272B31CB71DDB003C1317 /* UIWebView+JSEngine.m in Sources */,
 				3DDAE79E1D77B7EF001E986F /* RJLAudioPlayer.m in Sources */,
 				3DAFEF4C1CF4F24B00D219A3 /* RJLPublicTool.m in Sources */,
@@ -1093,6 +1134,7 @@
 				3D4933F81DAEAE2700CAF855 /* ifmChartDynamicIndexComponent.m in Sources */,
 				3D30B6B11D5CF0D600465CC3 /* VoicePlayer.m in Sources */,
 				3DAFEF4F1CF5291800D219A3 /* TTTAttributedLabel.m in Sources */,
+				9A8CFAF81EBC566B009862ED /* RJLRunTimeController.m in Sources */,
 				3DC4F9BB1CF0E30F00C4E90F /* NSMutableArray+PreventSpill.m in Sources */,
 				3DB272C01CB763B7003C1317 /* UIImageViewEx.m in Sources */,
 				3DD08EF11CAF431B006A06D0 /* PTThreadDownloader.m in Sources */,
@@ -1113,10 +1155,12 @@
 				3DB272BD1CB7633D003C1317 /* ifmLinearLayoutScrollView.m in Sources */,
 				3DAC37341DB0634200273BED /* ifmChartSuspensionComponent.m in Sources */,
 				3DBFD6641CEB8ECB0042D3C4 /* RJLAdvertisementSrollView.m in Sources */,
+				9A8CFAFD1EBC566B009862ED /* UIViewController+Tracking.m in Sources */,
 				3DBF68AC1D92F23D00CB4163 /* YBScrollTabHeadView.mm in Sources */,
 				3D39FF8A1CF02F3300175004 /* NSObject+PreventSpil.m in Sources */,
 				3D77D7691D6F6317002F865B /* MyUINavigationController.m in Sources */,
 				3DB272B61CB71E40003C1317 /* WKWebView+JSEngine.m in Sources */,
+				9A8CFAFB1EBC566B009862ED /* RunTimeObjectOne+Category.m in Sources */,
 				3D3FFBD21D1355BD00F77DDC /* CTFrameParserConfig.m in Sources */,
 				3D254A991DB0060500A37886 /* AFNetworkReachabilityManager.m in Sources */,
 				3DBBE5971E5E68A1006EA44F /* RJLRunLoopWork.m in Sources */,

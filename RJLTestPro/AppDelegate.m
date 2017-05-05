@@ -20,8 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	// Override point for customization after application launch.
 	[self initWebviewUserAgent];
-	[[RJLFluencyMonitor shareMonitor] startWithInterval:0.01 fault:0.001];
-	[RJLCrashHandler sharedInstance];
+//	[[RJLFluencyMonitor shareMonitor] startWithInterval:0.01 fault:0.001];
+//	[RJLCrashHandler sharedInstance];
 
 	return YES;
 }
