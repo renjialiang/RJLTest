@@ -135,6 +135,12 @@
 		9A8CFAFB1EBC566B009862ED /* RunTimeObjectOne+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CFAF31EBC566B009862ED /* RunTimeObjectOne+Category.m */; };
 		9A8CFAFC1EBC566B009862ED /* RunTimeObjectOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CFAF51EBC566B009862ED /* RunTimeObjectOne.m */; };
 		9A8CFAFD1EBC566B009862ED /* UIViewController+Tracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8CFAF71EBC566B009862ED /* UIViewController+Tracking.m */; };
+		DB3F05101EBF60A3005A8660 /* RJLRunLoopApplicationOne.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3F05061EBF60A3005A8660 /* RJLRunLoopApplicationOne.m */; };
+		DB3F05111EBF60A3005A8660 /* RJLRunLoopApplicationOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB3F05071EBF60A3005A8660 /* RJLRunLoopApplicationOne.xib */; };
+		DB3F05121EBF60A3005A8660 /* RJLThread.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3F05091EBF60A3005A8660 /* RJLThread.m */; };
+		DB3F05131EBF60A3005A8660 /* RJLRunLoopApplicationTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3F050C1EBF60A3005A8660 /* RJLRunLoopApplicationTwo.m */; };
+		DB3F05141EBF60A3005A8660 /* RJLRunLoopApplicationTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB3F050D1EBF60A3005A8660 /* RJLRunLoopApplicationTwo.xib */; };
+		DB3F05151EBF60A3005A8660 /* RJLRunLoopController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3F050F1EBF60A3005A8660 /* RJLRunLoopController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -401,6 +407,16 @@
 		9A8CFAF51EBC566B009862ED /* RunTimeObjectOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunTimeObjectOne.m; sourceTree = "<group>"; };
 		9A8CFAF61EBC566B009862ED /* UIViewController+Tracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Tracking.h"; sourceTree = "<group>"; };
 		9A8CFAF71EBC566B009862ED /* UIViewController+Tracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Tracking.m"; sourceTree = "<group>"; };
+		DB3F05051EBF60A3005A8660 /* RJLRunLoopApplicationOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJLRunLoopApplicationOne.h; sourceTree = "<group>"; };
+		DB3F05061EBF60A3005A8660 /* RJLRunLoopApplicationOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJLRunLoopApplicationOne.m; sourceTree = "<group>"; };
+		DB3F05071EBF60A3005A8660 /* RJLRunLoopApplicationOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RJLRunLoopApplicationOne.xib; sourceTree = "<group>"; };
+		DB3F05081EBF60A3005A8660 /* RJLThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJLThread.h; sourceTree = "<group>"; };
+		DB3F05091EBF60A3005A8660 /* RJLThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJLThread.m; sourceTree = "<group>"; };
+		DB3F050B1EBF60A3005A8660 /* RJLRunLoopApplicationTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJLRunLoopApplicationTwo.h; sourceTree = "<group>"; };
+		DB3F050C1EBF60A3005A8660 /* RJLRunLoopApplicationTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJLRunLoopApplicationTwo.m; sourceTree = "<group>"; };
+		DB3F050D1EBF60A3005A8660 /* RJLRunLoopApplicationTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RJLRunLoopApplicationTwo.xib; sourceTree = "<group>"; };
+		DB3F050E1EBF60A3005A8660 /* RJLRunLoopController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RJLRunLoopController.h; sourceTree = "<group>"; };
+		DB3F050F1EBF60A3005A8660 /* RJLRunLoopController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RJLRunLoopController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -830,6 +846,7 @@
 		3DD617721CADE7CC00C03555 /* RJLTestPro */ = {
 			isa = PBXGroup;
 			children = (
+				DB3F05031EBF60A3005A8660 /* RJLRunLoop */,
 				9A8CFAEB1EBC566B009862ED /* RJLRuntime */,
 				3DBDD6AF1E01B1120068DA18 /* RCCollectionView */,
 				3D42B8C11DBACF5D00B64817 /* Function */,
@@ -925,6 +942,39 @@
 				9A8CFAF71EBC566B009862ED /* UIViewController+Tracking.m */,
 			);
 			path = RJLRuntime;
+			sourceTree = "<group>";
+		};
+		DB3F05031EBF60A3005A8660 /* RJLRunLoop */ = {
+			isa = PBXGroup;
+			children = (
+				DB3F05041EBF60A3005A8660 /* RJLRunLoopApplicationOne */,
+				DB3F050A1EBF60A3005A8660 /* RJLRunLoopApplicationTwo */,
+				DB3F050E1EBF60A3005A8660 /* RJLRunLoopController.h */,
+				DB3F050F1EBF60A3005A8660 /* RJLRunLoopController.m */,
+			);
+			path = RJLRunLoop;
+			sourceTree = "<group>";
+		};
+		DB3F05041EBF60A3005A8660 /* RJLRunLoopApplicationOne */ = {
+			isa = PBXGroup;
+			children = (
+				DB3F05051EBF60A3005A8660 /* RJLRunLoopApplicationOne.h */,
+				DB3F05061EBF60A3005A8660 /* RJLRunLoopApplicationOne.m */,
+				DB3F05071EBF60A3005A8660 /* RJLRunLoopApplicationOne.xib */,
+				DB3F05081EBF60A3005A8660 /* RJLThread.h */,
+				DB3F05091EBF60A3005A8660 /* RJLThread.m */,
+			);
+			path = RJLRunLoopApplicationOne;
+			sourceTree = "<group>";
+		};
+		DB3F050A1EBF60A3005A8660 /* RJLRunLoopApplicationTwo */ = {
+			isa = PBXGroup;
+			children = (
+				DB3F050B1EBF60A3005A8660 /* RJLRunLoopApplicationTwo.h */,
+				DB3F050C1EBF60A3005A8660 /* RJLRunLoopApplicationTwo.m */,
+				DB3F050D1EBF60A3005A8660 /* RJLRunLoopApplicationTwo.xib */,
+			);
+			path = RJLRunLoopApplicationTwo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1039,6 +1089,8 @@
 				3DC9E2141CB5DDC3000674CB /* ExampleApp.html in Resources */,
 				3DDAE7951D77A53B001E986F /* 363598977.acc in Resources */,
 				3D50B3DA1DAF136600AFAB26 /* fundrealvaluationcurve.json in Resources */,
+				DB3F05111EBF60A3005A8660 /* RJLRunLoopApplicationOne.xib in Resources */,
+				DB3F05141EBF60A3005A8660 /* RJLRunLoopApplicationTwo.xib in Resources */,
 				3DBFD66D1CEBC3130042D3C4 /* appIntroduction_3.jpg in Resources */,
 				3DBFD66B1CEBC3130042D3C4 /* appIntroduction_1.jpg in Resources */,
 				3D3FFBD41D1355C400F77DDC /* content.json in Resources */,
@@ -1068,6 +1120,7 @@
 			files = (
 				3D30B6B71D5D079300465CC3 /* TBVideoRequestTask.m in Sources */,
 				3D9366901D99C34400B14B3D /* RCLearnAnimation.m in Sources */,
+				DB3F05121EBF60A3005A8660 /* RJLThread.m in Sources */,
 				3DAFEF551CF678B100D219A3 /* test.m in Sources */,
 				3DAC37311DB05F3900273BED /* ifmChartTopLegendComponent.m in Sources */,
 				3D3FFBCC1D13542C00F77DDC /* CoreTextUtils.m in Sources */,
@@ -1100,6 +1153,7 @@
 				3D77D75D1D6E1DD5002F865B /* MoveFlagTab.m in Sources */,
 				3D4933E31DAB1AFC00CAF855 /* ifmChartData.m in Sources */,
 				3D42B8C41DBAD0C200B64817 /* iFMAddressBook.m in Sources */,
+				DB3F05131EBF60A3005A8660 /* RJLRunLoopApplicationTwo.m in Sources */,
 				3D006EFD1CC80D2900014F3B /* RJLConcreateFactoryTwo.m in Sources */,
 				3D006EFA1CC80CFB00014F3B /* RJLConcreateFactoryOne.m in Sources */,
 				3DC9E20F1CB5D8FD000674CB /* WebViewJavascriptBridge.m in Sources */,
@@ -1140,6 +1194,7 @@
 				3DD08EF11CAF431B006A06D0 /* PTThreadDownloader.m in Sources */,
 				3DD08EEB1CAF1D5D006A06D0 /* RJLHttpDownLoadController.m in Sources */,
 				3DC9E1FC1CB5BBDC000674CB /* IMYWebView.m in Sources */,
+				DB3F05151EBF60A3005A8660 /* RJLRunLoopController.m in Sources */,
 				3D4933D41DAAB5C700CAF855 /* RJLWheelTitleView.m in Sources */,
 				3D4933E01DAB1ACF00CAF855 /* ifmChart.m in Sources */,
 				3DBF68B41D93426200CB4163 /* RJLCollectionViewCell.m in Sources */,
@@ -1174,6 +1229,7 @@
 				3D254A981DB0060500A37886 /* AFHTTPSessionManager.m in Sources */,
 				3DAFEF401CF4C20D00D219A3 /* RJLIndicatorLabel.m in Sources */,
 				3DBF68AA1D92F23D00CB4163 /* YBPageRoundScroller.mm in Sources */,
+				DB3F05101EBF60A3005A8660 /* RJLRunLoopApplicationOne.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

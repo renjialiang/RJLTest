@@ -9,7 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
+typedef IMP *IMPPointer;
+static void MethodSwizzele(id self, SEL _cmd, id arg1);
+static void (*MethodOriginal)(id self, SEL _cmd, id arg1);
+
 @interface RJLRuntimeTools : NSObject
+
++ (BOOL)swizzleClass:(Class)cls selector:(SEL)original with:(IMP)replacement store:(IMPPointer)store;
 /**
  *  方法替换
  *
